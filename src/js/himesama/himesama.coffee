@@ -3,13 +3,28 @@ HimesamaDoc = require './himesama-doc'
 { createTextNode, getElementById, createElement } = HimesamaDoc
 
 module.exports = Himesama =
+  
   el: (type) ->
     ->
       args       = arguments 
       attributes = args[0]
       innerHTML  = []
-      innerHTML.push args[index]
+      _.forEach [ 1 .. args.length ], (i) -> 
+        innerHTML.push args[i]
+      
       output = createElement type
+
+      if attributes?
+        _.forEach (_.keys attributes), (key) =>
+          attribute = attributes[key]
+
+          switch key
+            when 'onClick'
+              output.addEventListener 'click', attribute
+            when 'onKeyDown'
+              output.addEventListener 'keydown', attribute
+            else
+              output[key] = attribute
 
       _.forEach innerHTML, (child) ->
         if child?
@@ -19,9 +34,21 @@ module.exports = Himesama =
 
       output
 
-  render: (content, mountPoint) ->
+
+  MountPoint: undefined
+  Root:       undefined
+  Render: (root, mountPoint) ->
+    unless @MountPoint?
+      @MountPoint = mountPoint
+    unless @Root?
+      @Root = root
+
     content.address = '.0'
-    mountPoint.appendChild content.render()
+    # @MountPoint.removeChild @Root.render()
+    @MountPoint.appendChild @Root.render()
+
+  getRender: ->
+    @Render.bind @
 
   initState: (state) ->
     @state      = state
@@ -32,12 +59,13 @@ module.exports = Himesama =
   setState: (newValue) -> 
     _.forEach (_.keys newValue), (key) =>
       @state[key] = newValue[key]
-
+    @Render()
 
   component: (c) -> 
-    c.address = 'charles'
+    c.address   = 'charles'
+    c.setState  = @setState.bind Himesama
+    c.handle    = c.handle.bind c
     c
 
-    # c.setState = 
 
   Doc: HimesamaDoc
