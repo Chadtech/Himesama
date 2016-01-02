@@ -1,0 +1,253 @@
+@font-face {
+  font-family: HFNSS;
+  src: url("HFTIN.ttf");
+}
+body {
+  background: #040a0e;
+  padding: 0;
+  margin: 0;
+}
+.point {
+  font-family: HFNSS;
+  color: #c6b988;
+  font-size: 1em;
+  font-smooth: never;
+  webkit-font-smoothing: none;
+  -webkit-font-smoothing: none;
+  margin: 0;
+}
+.tracker {
+  border-color: #1a2129;
+  border-style: solid;
+  border-width: 1px;
+  width: 700px;
+  min-height: 100%;
+  margin: 7px;
+  padding: 1px;
+  float: left;
+}
+.list-right {
+  padding: 0;
+  margins: 0;
+  box-sizing: border-box;
+  width: 50px;
+}
+.list-right-Item {
+  content: '';
+  display: table;
+  clear: both;
+  width: 50px;
+  height: 12px;
+  position: absolute;
+  margin-top: 2px;
+}
+.list-right-Item.zero {
+  margin-left: 1px;
+  left: 0;
+}
+.list-right-Item.one {
+  left: 55px;
+}
+.list-right-Item.two {
+  margin-left: 6px;
+  left: 103px;
+}
+.list-right-Item.three {
+  margin-left: 6px;
+  left: 157px;
+}
+.list-down {
+  padding: 0;
+  margins: 0;
+  box-sizing: border-box;
+  width: 50px;
+}
+.list-down-Item {
+  content: '';
+  display: table;
+  clear: both;
+  width: 50px;
+  height: 12px;
+  position: absolute;
+  margin-top: 1px;
+}
+.list-down-Item.zero {
+  margin-left: 1px;
+}
+.list-down-Item.one {
+  margin-left: 1px;
+  top: 14px;
+}
+.list-down-Item.two {
+  margin-left: 1px;
+  top: 28px;
+}
+.list-down-Item.three {
+  margin-left: 1px;
+  top: 42px;
+}
+.container {
+  padding: 0;
+  margins: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+.row {
+  content: '';
+  display: table;
+  clear: both;
+  width: 100%;
+}
+.column {
+  float: left;
+  margin-right: 5px;
+  position: relative;
+  width: 50px;
+  height: 14px;
+}
+.content {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.button {
+  background-color: #dd3656;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1a2129;
+  font-family: HFNSS;
+  color: #060a00;
+  font-size: 1em;
+  font-smooth: never;
+  webkit-font-smoothing: none;
+  -webkit-font-smoothing: none;
+  outline: none;
+  width: 54px;
+  height: 13px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  margin: 0;
+}
+.button:hover {
+  background-color: #c6b988;
+  border-color: #c6b988;
+}
+.button.critical {
+  background-color: #f20723;
+}
+.button.null {
+  background-color: #040a0e;
+  color: #1a2129;
+}
+.button.G {
+  background-color: #78dd36;
+}
+.button.G:hover {
+  background-color: #c6b988;
+  border-color: #c6b988;
+}
+.button.D {
+  background-color: #ad366c;
+}
+.button.D:hover {
+  background-color: #c6b988;
+  border-color: #c6b988;
+}
+.nullButton {
+  background-color: #dd3656;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1a2129;
+  font-family: HFNSS;
+  color: #060a00;
+  font-size: 1em;
+  font-smooth: never;
+  webkit-font-smoothing: none;
+  -webkit-font-smoothing: none;
+  outline: none;
+  width: 54px;
+  height: 13px;
+  top: 0;
+  left: 0;
+  position: absolute;
+  margin: 0;
+  background-color: #445244;
+  color: #1a2129;
+}
+.dropright {
+  margin-top: -3px;
+  margin-left: -3px;
+  padding-bottom: 3px;
+  z-index: 9;
+  width: 218px;
+  height: 14px;
+  background-color: #445244;
+  position: fixed;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1a2129;
+}
+.dropdown {
+  margin-top: -2px;
+  margin-left: -2px;
+  padding-bottom: 3px;
+  z-index: 9;
+  width: 56px;
+  height: 54px;
+  background-color: #445244;
+  position: fixed;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1a2129;
+}
+.cell {
+  top: 0;
+  left: 0;
+  position: absolute;
+  margin: 0;
+  background-color: #060a00;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1a2129;
+  font-family: HFNSS;
+  color: #c6b988;
+  font-size: 1em;
+  font-smooth: never;
+  webkit-font-smoothing: none;
+  -webkit-font-smoothing: none;
+  outline: none;
+  width: 50px;
+}
+.cell:hover {
+  border-color: #c6b988;
+}
+.cell.filled {
+  background-color: #969d66;
+  color: #060a00;
+}
+.cellFilled {
+  top: 0;
+  left: 0;
+  position: absolute;
+  margin: 0;
+  background-color: #060a00;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #1a2129;
+  font-family: HFNSS;
+  color: #c6b988;
+  font-size: 1em;
+  font-smooth: never;
+  webkit-font-smoothing: none;
+  -webkit-font-smoothing: none;
+  outline: none;
+  width: 50px;
+  background-color: #969d66;
+  color: #060a00;
+}
+.TestDiv {
+  margin-top: 90px;
+  margin-left: 20px;
+}

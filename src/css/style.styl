@@ -1,0 +1,247 @@
+@font-face
+  font-family HFNSS
+  src url('HFTIN.ttf')
+
+standardSize    = 1em
+cellWidth       = 50px
+cellHeight      = 13px
+
+pointColor      = #c6b988
+unimportantText = #969d66
+
+importantText   = #dd3656
+importantTextG  = #78dd36
+importantTextD  = #ad366c
+
+ignorable       = #445244
+backgroundColor = #040a0e
+totalBlack      = #060a00
+trackerBorder   = #1a2129
+
+red             = #f20723
+  
+
+body
+  background  backgroundColor
+  padding     0
+  margin      0
+
+
+.point
+  font-family             HFNSS
+  color                   pointColor
+  font-size               standardSize
+  font-smooth             never
+  webkit-font-smoothing   none
+  -webkit-font-smoothing  none
+  margin                  0 
+  
+.tracker
+  border-color  trackerBorder
+  border-style  solid
+  border-width  1px
+  width         700px
+  min-height    100%
+  margin        7px
+  padding       1px
+  float         left
+
+.list-right
+  padding     0
+  margins     0
+  box-sizing  border-box
+  width       cellWidth
+
+.list-right-Item 
+  content       ''
+  display       table
+  clear         both
+  width         cellWidth
+  height        12px
+  position      absolute
+  margin-top    2px
+  &.zero
+    margin-left 1px
+    left        0
+  &.one
+    left        cellWidth + 5
+  &.two
+    margin-left 6px
+    left        ((cellWidth) * 2) + 3
+  &.three
+    margin-left 6px
+    left        ((cellWidth) * 3) + 7
+
+
+.list-down
+  padding     0
+  margins     0
+  box-sizing  border-box
+  width       cellWidth
+
+.list-down-Item 
+  content       ''
+  display       table
+  clear         both
+  width         cellWidth
+  height        12px
+  position      absolute
+  margin-top    1px
+  &.zero
+    margin-left 1px
+  &.one
+    margin-left 1px
+    top         cellHeight + 1
+  &.two
+    margin-left 1px
+    top        ((cellHeight + 1) * 2)
+  &.three
+    margin-left 1px
+    top        ((cellHeight + 1) * 3)
+
+
+.container
+  padding 0
+  margins 0
+  box-sizing border-box
+  width 100%
+
+
+.row  
+  content   ''
+  display   table
+  clear     both
+  width     100%
+ 
+
+.column  
+  float         left 
+  margin-right  5px
+  position      relative
+  width         cellWidth
+  height        14px
+  
+
+.content 
+  margin    0
+  padding   0
+  width     100%
+  height    100%
+
+    
+buttonContent()
+  background-color        importantText
+  border-style            solid
+  border-width            1px
+  border-color            trackerBorder
+  font-family             HFNSS
+  color                   totalBlack
+  font-size               standardSize
+  font-smooth             never
+  webkit-font-smoothing   none
+  -webkit-font-smoothing  none
+  outline                 none
+  width                   54px
+  height                  13px
+  top                     0
+  left                    0
+  position                absolute
+  margin                  0
+
+
+.button
+  buttonContent()
+  &:hover
+    background-color  pointColor
+    border-color      pointColor
+
+  &.critical
+    background-color  red
+  &.null
+    background-color  backgroundColor
+    color             trackerBorder
+  &.G
+    &:hover
+      background-color  pointColor
+      border-color      pointColor
+    background-color    importantTextG
+  &.D
+    &:hover
+      background-color  pointColor
+      border-color      pointColor
+    background-color    importantTextD
+
+
+.nullButton
+  buttonContent()
+  background-color ignorable
+  color            trackerBorder
+
+  
+cellContent()
+  top                     0
+  left                    0
+  position                absolute
+  margin                  0
+  background-color        totalBlack
+  border-style            solid
+  border-width            1px
+  border-color            trackerBorder
+  font-family             HFNSS
+  color                   pointColor
+  font-size               standardSize
+  font-smooth             never
+  webkit-font-smoothing   none
+  -webkit-font-smoothing  none
+  outline                 none
+  width                   cellWidth  
+  
+
+.dropright
+  margin-top              -3px
+  margin-left             -3px
+  padding-bottom          3px
+  z-index                 9
+  width                   218px
+  height                  14px
+  background-color        ignorable
+  position                fixed
+  border-style            solid
+  border-width            1px
+  border-color            trackerBorder
+
+  
+.dropdown
+  margin-top              -2px
+  margin-left             -2px
+  padding-bottom          3px
+  z-index                 9
+  width                   56px
+  height                  54px
+  background-color        ignorable
+  position                fixed
+  border-style            solid
+  border-width            1px
+  border-color            trackerBorder
+
+
+.cell
+  cellContent()
+  &:hover
+    border-color     pointColor
+  &.filled
+    background-color unimportantText
+    color            totalBlack
+
+
+.cellFilled
+  cellContent()
+  background-color  unimportantText
+  color             totalBlack
+  
+
+
+.TestDiv
+  margin-top  90px
+  margin-left 20px
+
