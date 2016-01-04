@@ -1,6 +1,10 @@
 _           = require 'lodash'
 HimesamaDoc = require './himesama-doc'
-{ createTextNode, getElementById, createElement } = HimesamaDoc
+{ createTextNode
+  getElementById
+  createElement
+  querySelectorAll
+  activeElement } = HimesamaDoc
 
 module.exports = Himesama =
   
@@ -9,7 +13,7 @@ module.exports = Himesama =
       args       = arguments 
       attributes = args[0]
       innerHTML  = []
-      _.forEach [ 1 .. args.length ], (i) -> 
+      _.forEach ([ 0 .. (args.length - 1) ].slice 1), (i) -> 
         innerHTML.push args[i]
       
       output = createElement type
@@ -24,12 +28,17 @@ module.exports = Himesama =
             when 'onKeyDown'
               output.addEventListener 'keydown', attribute
             else
-              output[key] = attribute
+              output.setAttribute key, attribute
 
-      _.forEach innerHTML, (child) ->
+      _.forEach innerHTML, (child, ci) ->
         if child?
           if typeof child is 'string'
             child = createTextNode child
+          else
+            thisOnesID = attributes['himesama-id']
+            thisOnesID += '.' + ci
+            child.setAttribute 'himesama-id', thisOnesID
+
           output.appendChild child
 
       output
@@ -38,13 +47,15 @@ module.exports = Himesama =
   MountPoint: undefined
   Root:       undefined
   Render: (root, mountPoint) ->
-    unless @MountPoint?
+    if mountPoint?
       @MountPoint = mountPoint
-    unless @Root?
-      @Root = root
+    if root?
+      @Root       = root
 
-    content.address = '.0'
-    # @MountPoint.removeChild @Root.render()
+    # (querySelectorAll '[himesama-id]')[0]?.remove()
+
+    # console.log 'a', document.activeElement  
+
     @MountPoint.appendChild @Root.render()
 
   getRender: ->
@@ -62,7 +73,6 @@ module.exports = Himesama =
     @Render()
 
   component: (c) -> 
-    c.address   = 'charles'
     c.setState  = @setState.bind Himesama
     c.handle    = c.handle.bind c
     c

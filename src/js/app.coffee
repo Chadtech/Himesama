@@ -1,14 +1,14 @@
 # Libraries
-Himesama            = require './himesama/Himesama'
-{ el,  Doc }        = require './himesama/Himesama'
-Render              = Himesama.getRender()
-{ getElementById }  = Doc
+Himesama              = require './himesama/himesama'
+{ el,  Doc, Render }  = Himesama
+Render                = Himesama.getRender()
+{ getElementById }    = Doc
 
 
 p       = el 'p'
 div     = el 'div'
 input   = el 'input'
-Content = getElementById 'content'
+Mount   = getElementById 'mount'
 
 
 initialState = 
@@ -27,10 +27,10 @@ App = Himesama.component
   ]
 
   handle: (event) ->
-    @setState title: event.target.value
+    @setState title: event.target.value + (String.fromCharCode event.which)
 
   render: ->
-    div null,
+    div 'himesama-id': '.0',
       p null, @state.title
       p null, @state.catchPhrase 
       input 
@@ -38,6 +38,5 @@ App = Himesama.component
         value:     @state.title
 
 
-Render App, content
-
+Render App, Mount
 
