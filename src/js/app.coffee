@@ -1,5 +1,5 @@
 # Libraries
-Himesama              = require './himesama/himesama'
+Himesama              = require './himesama'
 { el,  Doc, Render }  = Himesama
 Render                = Himesama.getRender()
 { getElementById }    = Doc
@@ -22,7 +22,7 @@ Himesama.initState initialState
 
 App = Himesama.component
 
-  state: initialState
+  state: Himesama.getStore()
 
   needs: [
     'title'

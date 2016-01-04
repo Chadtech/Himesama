@@ -56,8 +56,6 @@ module.exports = Himesama =
     # console.log 'a', document.activeElement  
     @MountPoint.appendChild @Root.render()
 
-
-
   getRender: ->
     @Render.bind @
 
@@ -80,3 +78,6 @@ module.exports = Himesama =
 
 
   Doc: HimesamaDoc
+
+
+  
