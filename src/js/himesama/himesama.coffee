@@ -52,11 +52,11 @@ module.exports = Himesama =
     if root?
       @Root       = root
 
-    # (querySelectorAll '[himesama-id]')[0]?.remove()
-
+    (querySelectorAll '[himesama-id]')[0]?.remove()
     # console.log 'a', document.activeElement  
-
     @MountPoint.appendChild @Root.render()
+
+
 
   getRender: ->
     @Render.bind @
@@ -73,8 +73,9 @@ module.exports = Himesama =
     @Render()
 
   component: (c) -> 
-    c.setState  = @setState.bind Himesama
-    c.handle    = c.handle.bind c
+    c.setState    = @setState.bind Himesama
+    c.handleUp    = c.handleUp.bind c
+    c.handleDown  = c.handleDown.bind c
     c
 
 

@@ -14,8 +14,11 @@ Mount   = getElementById 'mount'
 initialState = 
   title:       'Himesama..'
   catchPhrase: 'Lets make websites senpai!!'
+  counter:     0
+
 
 Himesama.initState initialState
+
 
 App = Himesama.component
 
@@ -24,18 +27,29 @@ App = Himesama.component
   needs: [
     'title'
     'catchPhrase'
+    'counter'
   ]
 
-  handle: (event) ->
-    @setState title: event.target.value + (String.fromCharCode event.which)
+  handleUp: (event) ->
+    @setState counter: @state.counter + 1
+
+  handleDown: (event) ->
+    @setState counter: @state.counter - 1
 
   render: ->
+
     div 'himesama-id': '.0',
       p null, @state.title
       p null, @state.catchPhrase 
+      p null, 'Counter : ' + @state.counter
       input 
-        onKeyDown: @handle
-        value:     @state.title
+        onClick:   @handleUp
+        value:     '+ 1'
+        type:      'submit'
+      input 
+        onClick:   @handleDown
+        value:     '- 1'
+        type:      'submit'
 
 
 Render App, Mount
