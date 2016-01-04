@@ -1,10 +1,10 @@
 _           = require 'lodash'
-HimesamaDoc = require './himesama-doc'
 { createTextNode
   getElementById
   createElement
   querySelectorAll
-  activeElement } = HimesamaDoc
+  activeElement } = require './himesama-doc'
+
 
 module.exports = Himesama =
   
