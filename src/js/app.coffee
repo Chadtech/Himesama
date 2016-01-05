@@ -8,7 +8,6 @@ Render                   = Himesama.getRender()
 # DOM
 p     = el 'p'
 div   = el 'div'
-input = el 'input'
 
 # State
 initialState = 

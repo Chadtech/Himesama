@@ -35,6 +35,7 @@ gulp.task 'stylus', ->
   .pipe stylus()
   .pipe gulp.dest paths.public
 
+
 gulp.task 'watch', ->
   autowatch gulp,
     server: './public/*.html'
@@ -42,8 +43,10 @@ gulp.task 'watch', ->
     stylus: paths.stylus
     coffee: paths.coffee
 
+
 gulp.task 'server', -> 
   require './server'
+
 
 gulp.task 'default', ['coffee', 'stylus', 'watch', 'server' ]
 

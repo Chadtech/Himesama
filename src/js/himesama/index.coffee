@@ -83,13 +83,12 @@ module.exports = Himesama =
   Component: (c) -> 
 
     _.forEach (_.keys c), (key) ->
-      if not (key in himesamaKeys)
+      unless key in himesamaKeys
         if typeof c[key] is 'function'
           c[key] = c[key].bind c
 
     c.isHimesamaComponent = true
     c.setState            = @setState.bind Himesama
-    # c.state               = @state.bind Himesama
     c
 
 
