@@ -23,21 +23,23 @@ Count  = require './count'
 
 App = Himesama.Component
 
+  name:  'app'
   state: Himesama.getStore()
 
-  needs: [
-    'title'
-    'catchPhrase'
-    'counter'
-  ]
+  # needs: [
+  #   'title'
+  #   'catchPhrase'
+  # ]
 
   render: ->
+    console.log 'Rendering App'
 
     div null,
       p null, @state.title
       p null, @state.catchPhrase 
-      Inputs
       Count
+      Inputs
+      # Count
 
 
 Render App, getElementById 'mount'
