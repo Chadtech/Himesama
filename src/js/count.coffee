@@ -3,16 +3,13 @@ Himesama = require './himesama'
 {el}     = require './himesama'
 
 # DOM
-p     = el 'p'
+p = el 'p'
 
 
-Count = Himesama.Component
+module.exports = Count = Himesama.Component
 
   state: Himesama.getStore()
   needs: [ 'counter' ]
-  render: -> 
+  render: ->
     p null, 
       'Count : ' + @state.counter
-
-
-module.exports = Count

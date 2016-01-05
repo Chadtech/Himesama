@@ -7,7 +7,7 @@ div   = el 'div'
 input = el 'input'
 
 
-Inputs = Himesama.Component
+module.exports = Inputs = Himesama.Component
 
   state: Himesama.getStore()
 
@@ -32,4 +32,4 @@ Inputs = Himesama.Component
         type:      'submit'
 
 
-module.exports = Inputs
+# module.exports = Inputs

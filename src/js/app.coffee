@@ -6,8 +6,8 @@ Render                   = Himesama.getRender()
 { getElementById }       = Doc
 
 # DOM
-p     = el 'p'
-div   = el 'div'
+p   = el 'p'
+div = el 'div'
 
 # State
 initialState = 
