@@ -43,9 +43,6 @@ module.exports = Himesama =
 
       output
 
-
-  MountPoint: undefined
-  Root:       undefined
   Render: (root, mountPoint) ->
     if mountPoint?
       @MountPoint = mountPoint
@@ -55,13 +52,11 @@ module.exports = Himesama =
     (querySelectorAll '[himesama-id]')[0]?.remove()
 
     rendering = @Root.render()
-    rendering.setAttribute 'himesama-id', '.0'
     allocateID = (element, address) ->
+      element.setAttribute 'himesama-id', address
       _.forEach element.children, (child, ci) ->
-        thisAddress = address + '.' + ci
-        child.setAttribute 'himesama-id', thisAddress
-        allocateID child,                 thisAddress
-    allocateID rendering,  '.0'
+        allocateID child, address + '.' + ci
+    allocateID rendering, '.0'
 
     @MountPoint.appendChild rendering
 
