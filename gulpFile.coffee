@@ -37,6 +37,7 @@ gulp.task 'stylus', ->
 
 gulp.task 'watch', ->
   autowatch gulp,
+    server: './public/*.html'
     jade:   paths.jade
     stylus: paths.stylus
     coffee: paths.coffee

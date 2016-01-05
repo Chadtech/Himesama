@@ -5,10 +5,10 @@ Render                = Himesama.getRender()
 { getElementById }    = Doc
 
 
-p       = el 'p'
-div     = el 'div'
-input   = el 'input'
-Mount   = getElementById 'mount'
+p     = el 'p'
+div   = el 'div'
+input = el 'input'
+Mount = getElementById 'mount'
 
 
 initialState = 
@@ -38,7 +38,7 @@ App = Himesama.component
 
   render: ->
 
-    div 'himesama-id': '.0',
+    div null,
       p null, @state.title
       p null, @state.catchPhrase 
       p null, 'Counter : ' + @state.counter

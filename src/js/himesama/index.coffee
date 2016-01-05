@@ -34,10 +34,6 @@ module.exports = Himesama =
         if child?
           if typeof child is 'string'
             child = createTextNode child
-          else
-            thisOnesID = attributes['himesama-id']
-            thisOnesID += '.' + ci
-            child.setAttribute 'himesama-id', thisOnesID
 
           output.appendChild child
 
@@ -52,9 +48,27 @@ module.exports = Himesama =
     if root?
       @Root       = root
 
+
+
     (querySelectorAll '[himesama-id]')[0]?.remove()
-    # console.log 'a', document.activeElement  
-    @MountPoint.appendChild @Root.render()
+    # console.log 'a', document.activeElement
+    # console.log @Root  
+    # @Root.setAttribute 'himesama-id', '.0'
+
+    # console.log (@el 'div')
+    # rendering = (@el 'div') ('himesama-id':'.'),
+    #   @Root.render()
+    rendering = @Root.render()
+    rendering.setAttribute 'himesama-id', '.0'
+    checkChildren = (element) ->
+      thisAddress = (element.getAttribute 'himesama-id') or '.0'
+      _.forEach element.children, (child, ci) ->
+        child.setAttribute 'himesama-id', thisAddress + '.' + ci
+        checkChildren child
+
+    checkChildren rendering
+
+    @MountPoint.appendChild rendering
 
   getRender: ->
     @Render.bind @
@@ -77,7 +91,7 @@ module.exports = Himesama =
     c
 
 
-  Doc: HimesamaDoc
+  Doc: require './himesama-doc'
 
 
   
