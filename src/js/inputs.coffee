@@ -8,6 +8,8 @@ div   = el 'div'
 input = el 'input'
 
 
+console.log 'Eeeey', Himesama.getStore()
+
 Inputs = Himesama.Component
 
   state: Himesama.getStore()

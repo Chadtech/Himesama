@@ -89,6 +89,7 @@ module.exports = Himesama =
 
     c.isHimesamaComponent = true
     c.setState            = @setState.bind Himesama
+    # c.state               = @state.bind Himesama
     c
 
 

@@ -5,10 +5,7 @@ Himesama                 = require './himesama'
 Render                   = Himesama.getRender()
 { getElementById }       = Doc
 
-# Components
-Inputs = require './inputs'
-
-# Dom
+# DOM
 p     = el 'p'
 div   = el 'div'
 input = el 'input'
@@ -19,6 +16,10 @@ initialState =
   catchPhrase: 'Lets make websites senpai!!'
   counter:     0
 Himesama.initState initialState
+
+# Components
+Inputs = require './inputs'
+Count  = require './count'
 
 
 App = Himesama.Component
@@ -36,8 +37,9 @@ App = Himesama.Component
     div null,
       p null, @state.title
       p null, @state.catchPhrase 
-      p null, 'Counter : ' + @state.counter
       Inputs
+      Count
+
 
 Render App, getElementById 'mount'
 
