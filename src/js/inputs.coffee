@@ -3,7 +3,6 @@ Himesama = require './himesama'
 {el}     = require './himesama'
 
 # DOM
-p     = el 'p'
 div   = el 'div'
 input = el 'input'
 
