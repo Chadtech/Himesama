@@ -52,13 +52,14 @@ module.exports = Himesama =
 
     rendering = @Root.render()
     rendering.setAttribute 'himesama-id', '.0'
-    checkChildren = (element, address) ->
+    allocateID = (element, address) ->
       _.forEach element.children, (child, ci) ->
         child.setAttribute 'himesama-id', address + '.' + ci
-        checkChildren child,              address + '.' + ci
-    checkChildren rendering, '.0'
+        allocateID child,                 address + '.' + ci
+    allocateID rendering, '.0'
 
     @MountPoint.appendChild rendering
+
 
   getRender: ->
     @Render.bind @
@@ -74,7 +75,7 @@ module.exports = Himesama =
       @state[key] = newValue[key]
     @Render()
 
-  component: (c) -> 
+  Component: (c) -> 
     c.setState    = @setState.bind Himesama
     c.handleUp    = c.handleUp.bind c
     c.handleDown  = c.handleDown.bind c

@@ -1,14 +1,14 @@
 # Libraries
-Himesama              = require './himesama'
-{ el,  Doc, Render }  = Himesama
-Render                = Himesama.getRender()
-{ getElementById }    = Doc
+Himesama                  = require './himesama'
+{ el,  Doc, Render }      = Himesama
+{ Component, initState }  = Himesama
+Render                    = Himesama.getRender()
+{ getElementById }        = Doc
 
 
 p     = el 'p'
 div   = el 'div'
 input = el 'input'
-Mount = getElementById 'mount'
 
 
 initialState = 
@@ -16,11 +16,10 @@ initialState =
   catchPhrase: 'Lets make websites senpai!!'
   counter:     0
 
+initState initialState
 
-Himesama.initState initialState
 
-
-App = Himesama.component
+App = Component
 
   state: Himesama.getStore()
 
@@ -52,5 +51,5 @@ App = Himesama.component
         type:      'submit'
 
 
-Render App, Mount
+Render App, getElementById 'mount'
 
