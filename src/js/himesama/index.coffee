@@ -54,8 +54,9 @@ module.exports = Himesama =
     rendering.setAttribute 'himesama-id', '.0'
     allocateID = (element, address) ->
       _.forEach element.children, (child, ci) ->
-        child.setAttribute 'himesama-id', address + '.' + ci
-        allocateID child,                 address + '.' + ci
+        thisAddress = address + '.' + ci
+        child.setAttribute 'himesama-id', thisAddress
+        allocateID child,                 thisAddress
     allocateID rendering, '.0'
 
     @MountPoint.appendChild rendering
