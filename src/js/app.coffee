@@ -1,25 +1,24 @@
 # Libraries
-Himesama                  = require './himesama'
-{ el,  Doc, Render }      = Himesama
-{ Component, initState }  = Himesama
-Render                    = Himesama.getRender()
-{ getElementById }        = Doc
+Himesama                 = require './himesama'
+{ el,  Doc, Render }     = Himesama
+{ Component, initState } = Himesama
+Render                   = Himesama.getRender()
+{ getElementById }       = Doc
 
+# Components
+Inputs = require './inputs'
 
+# Dom
 p     = el 'p'
 div   = el 'div'
 input = el 'input'
 
-
+# State
 initialState = 
   title:       'Himesama..'
   catchPhrase: 'Lets make websites senpai!!'
   counter:     0
-
 Himesama.initState initialState
-
-
-Inputs = require './inputs'
 
 
 App = Himesama.Component
