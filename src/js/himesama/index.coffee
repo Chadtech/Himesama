@@ -48,25 +48,15 @@ module.exports = Himesama =
     if root?
       @Root       = root
 
-
-
     (querySelectorAll '[himesama-id]')[0]?.remove()
-    # console.log 'a', document.activeElement
-    # console.log @Root  
-    # @Root.setAttribute 'himesama-id', '.0'
 
-    # console.log (@el 'div')
-    # rendering = (@el 'div') ('himesama-id':'.'),
-    #   @Root.render()
     rendering = @Root.render()
     rendering.setAttribute 'himesama-id', '.0'
-    checkChildren = (element) ->
-      thisAddress = (element.getAttribute 'himesama-id') or '.0'
+    checkChildren = (element, address) ->
       _.forEach element.children, (child, ci) ->
-        child.setAttribute 'himesama-id', thisAddress + '.' + ci
-        checkChildren child
-
-    checkChildren rendering
+        child.setAttribute 'himesama-id', address + '.' + ci
+        checkChildren child,              address + '.' + ci
+    checkChildren rendering, '.0'
 
     @MountPoint.appendChild rendering
 
