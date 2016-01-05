@@ -26,11 +26,6 @@ App = Himesama.Component
   name:  'app'
   state: Himesama.getStore()
 
-  # needs: [
-  #   'title'
-  #   'catchPhrase'
-  # ]
-
   render: ->
     console.log 'Rendering App'
 
@@ -39,8 +34,6 @@ App = Himesama.Component
       p null, @state.catchPhrase 
       Count
       Inputs
-      # Count
-
 
 Render App, getElementById 'mount'
 

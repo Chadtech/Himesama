@@ -84,7 +84,7 @@ module.exports = Himesama =
 
       rendering = @components[name].render()
       rendering.setAttribute 'himesama-name', name
-      @allocateID rendering, parentsID + '.' + childrenCount
+      @allocateID rendering, nodeIndex
 
       parent.insertBefore rendering, parent.childNodes[index]
 
