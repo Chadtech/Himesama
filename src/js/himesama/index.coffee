@@ -26,7 +26,6 @@ module.exports = Himesama =
 
           switch key
             when 'onClick'
-              # console.log 'yeeeee', attributes
               output.addEventListener 'click', attribute
             when 'onKeyDown'
               output.addEventListener 'keydown', attribute
@@ -90,8 +89,6 @@ module.exports = Himesama =
 
     c.isHimesamaComponent = true
     c.setState            = @setState.bind Himesama
-    # c.handleUp    = c.handleUp.bind c
-    # c.handleDown  = c.handleDown.bind c
     c
 
 
