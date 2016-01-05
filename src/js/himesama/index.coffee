@@ -5,6 +5,8 @@ _           = require 'lodash'
   querySelectorAll
   activeElement } = require './himesama-doc'
 
+himesamaKeys = require './himesama-keys'
+
 
 module.exports = Himesama =
   
@@ -24,6 +26,7 @@ module.exports = Himesama =
 
           switch key
             when 'onClick'
+              # console.log 'yeeeee', attributes
               output.addEventListener 'click', attribute
             when 'onKeyDown'
               output.addEventListener 'keydown', attribute
@@ -34,6 +37,8 @@ module.exports = Himesama =
         if child?
           if typeof child is 'string'
             child = createTextNode child
+          if child.isHimesamaComponent
+            child = child.render()
 
           output.appendChild child
 
@@ -57,7 +62,7 @@ module.exports = Himesama =
         thisAddress = address + '.' + ci
         child.setAttribute 'himesama-id', thisAddress
         allocateID child,                 thisAddress
-    allocateID rendering, '.0'
+    allocateID rendering,  '.0'
 
     @MountPoint.appendChild rendering
 
@@ -77,9 +82,16 @@ module.exports = Himesama =
     @Render()
 
   Component: (c) -> 
-    c.setState    = @setState.bind Himesama
-    c.handleUp    = c.handleUp.bind c
-    c.handleDown  = c.handleDown.bind c
+
+    _.forEach (_.keys c), (key) ->
+      if not (key in himesamaKeys)
+        if typeof c[key] is 'function'
+          c[key] = c[key].bind c
+
+    c.isHimesamaComponent = true
+    c.setState            = @setState.bind Himesama
+    # c.handleUp    = c.handleUp.bind c
+    # c.handleDown  = c.handleDown.bind c
     c
 
 

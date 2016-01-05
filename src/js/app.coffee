@@ -16,10 +16,13 @@ initialState =
   catchPhrase: 'Lets make websites senpai!!'
   counter:     0
 
-initState initialState
+Himesama.initState initialState
 
 
-App = Component
+Inputs = require './inputs'
+
+
+App = Himesama.Component
 
   state: Himesama.getStore()
 
@@ -29,27 +32,13 @@ App = Component
     'counter'
   ]
 
-  handleUp: (event) ->
-    @setState counter: @state.counter + 1
-
-  handleDown: (event) ->
-    @setState counter: @state.counter - 1
-
   render: ->
 
     div null,
       p null, @state.title
       p null, @state.catchPhrase 
       p null, 'Counter : ' + @state.counter
-      input 
-        onClick:   @handleUp
-        value:     '+ 1'
-        type:      'submit'
-      input 
-        onClick:   @handleDown
-        value:     '- 1'
-        type:      'submit'
-
+      Inputs
 
 Render App, getElementById 'mount'
 
