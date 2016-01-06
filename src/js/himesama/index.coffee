@@ -71,7 +71,7 @@ module.exports = Himesama =
 
   Rerender: (statePiece) ->
     _.forEach @rerenderees[statePiece], (name) =>
-      nameTag       = '[himesama-name=' + name + ']'
+      nameTag       = '[himesama-name="' + name + '"]'
       himesamaNode  = querySelector nameTag
       nodeIndex     = himesamaNode.getAttribute 'himesama-id'
       index         = @getIndex nodeIndex
