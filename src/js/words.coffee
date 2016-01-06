@@ -17,6 +17,6 @@ module.exports = Words = Himesama.Component
 
     div null, 
       _.map @state.words, (word) ->
-        p null, word
+        p className: 'point', word
 
 

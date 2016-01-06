@@ -176,6 +176,10 @@ body {
   background-color: #445244;
   color: #1a2129;
 }
+.nullButton:hover {
+  background-color: #c6b988;
+  border-color: #c6b988;
+}
 .dropright {
   margin-top: -3px;
   margin-left: -3px;

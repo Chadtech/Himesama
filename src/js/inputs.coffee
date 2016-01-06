@@ -19,24 +19,31 @@ module.exports = Inputs = Himesama.Component
     if event.which is 13
       @state.words.push event.target.value
       @setState words: @state.words
+      event.target.value = ''
 
   render: ->
 
     console.log 'Rendering inputs'
 
-    div null,
-      
-      input 
-        onClick:   @handleUp
-        value:     '+ 1'
-        type:      'submit'
-      
-      input 
-        onClick:   @handleDown
-        value:     '- 1'
-        type:      'submit'
+    div className: 'row',
 
-      input
-        onKeyDown:    @handleKey
-        placeholder:  'type a word, press enter'
+      div className: 'column',    
+        input 
+          className: 'nullButton'
+          onClick:   @handleUp
+          value:     '+ 1'
+          type:      'submit'
+      
+      div className: 'column', 
+        input 
+          className: 'nullButton'
+          onClick:   @handleDown
+          value:     '- 1'
+          type:      'submit'
+
+      div className: 'column', 
+        input
+          className:    'cell'
+          onKeyDown:    @handleKey
+          placeholder:  'type a word, press enter'
 

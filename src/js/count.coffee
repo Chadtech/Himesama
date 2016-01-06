@@ -10,8 +10,8 @@ module.exports = Count = Himesama.Component
 
   needs: [ 'counter' ]
   render: ->
-    
+
     console.log 'Rendering count'
 
-    p null, 
+    p className: 'point', 
       'Count : ' + @state.counter

@@ -30,6 +30,8 @@ module.exports = Himesama =
               output.addEventListener 'click', attribute
             when 'onKeyDown'
               output.addEventListener 'keydown', attribute
+            when 'className'
+              output.setAttribute 'class', attribute
             else
               output.setAttribute key, attribute
 

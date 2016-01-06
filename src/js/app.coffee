@@ -26,12 +26,12 @@ Words  = require './words'
 App = Himesama.Component
 
   render: ->
-    
+
     console.log 'Rendering App'
 
     div null,
-      p null, @state.title
-      p null, @state.catchPhrase 
+      p className: 'point', @state.title
+      p className: 'point', @state.catchPhrase 
       Count
       Inputs
       Words
