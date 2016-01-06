@@ -9,15 +9,20 @@ input = el 'input'
 
 module.exports = Inputs = Himesama.Component
 
-  state: Himesama.getStore()
-
   handleUp: (event) ->
     @setState counter: @state.counter + 1
 
   handleDown: (event) ->
     @setState counter: @state.counter - 1
 
+  handleKey: (event) ->
+    if event.which is 13
+      @state.words.push event.target.value
+      @setState words: @state.words
+
   render: ->
+
+    console.log 'Rendering inputs'
 
     div null,
       
@@ -31,5 +36,7 @@ module.exports = Inputs = Himesama.Component
         value:     '- 1'
         type:      'submit'
 
+      input
+        onKeyDown:    @handleKey
+        placeholder:  'type a word, press enter'
 
-# module.exports = Inputs

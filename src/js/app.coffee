@@ -14,18 +14,19 @@ initialState =
   title:       'Himesama..'
   catchPhrase: 'Lets make websites senpai!!'
   counter:     0
+  words:       []
 Himesama.initState initialState
 
 # Components
 Inputs = require './inputs'
 Count  = require './count'
+Words  = require './words'
 
 
 App = Himesama.Component
 
-  state: Himesama.getStore()
-
   render: ->
+    
     console.log 'Rendering App'
 
     div null,
@@ -33,6 +34,7 @@ App = Himesama.Component
       p null, @state.catchPhrase 
       Count
       Inputs
+      Words
 
 Render App, getElementById 'mount'
 

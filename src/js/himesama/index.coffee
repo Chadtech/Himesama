@@ -33,6 +33,7 @@ module.exports = Himesama =
             else
               output.setAttribute key, attribute
 
+      innerHTML = _.flatten innerHTML
       _.forEach innerHTML, (child, ci) ->
         if child?
           if typeof child is 'string'
@@ -119,11 +120,9 @@ module.exports = Himesama =
     _.forEach (c.needs), (need) =>
       @rerenderees[need].push c.name
 
-
     c.isHimesamaComponent = true
     c.setState            = @setState.bind Himesama
-
-
+    c.state               = @getStore()
 
     c
 
