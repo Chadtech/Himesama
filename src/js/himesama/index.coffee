@@ -102,8 +102,6 @@ module.exports = Himesama =
     _.forEach (_.keys newValue), (key) =>
       @state[key] = newValue[key]
       @Rerender key
-    # @Render()
-
 
   components: {}
 
@@ -114,6 +112,10 @@ module.exports = Himesama =
         if typeof c[key] is 'function'
           c[key] = c[key].bind c
 
+    componentId = (Math.random().toString 16).slice 2
+    c.name      = componentId
+    @components[componentId] = c
+
     _.forEach (c.needs), (need) =>
       @rerenderees[need].push c.name
 
@@ -121,8 +123,7 @@ module.exports = Himesama =
     c.isHimesamaComponent = true
     c.setState            = @setState.bind Himesama
 
-    @components[c.name] = c
-    console.log @components
+
 
     c
 

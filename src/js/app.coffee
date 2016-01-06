@@ -23,7 +23,6 @@ Count  = require './count'
 
 App = Himesama.Component
 
-  name:  'app'
   state: Himesama.getStore()
 
   render: ->

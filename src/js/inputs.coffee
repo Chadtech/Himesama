@@ -9,7 +9,6 @@ input = el 'input'
 
 module.exports = Inputs = Himesama.Component
 
-  name:  'inputs'
   state: Himesama.getStore()
 
   handleUp: (event) ->
