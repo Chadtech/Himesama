@@ -30,7 +30,7 @@ module.exports = Inputs = Himesama.Component
       div className:      'column',    
         input 
           className:      'nullButton'
-          eventListener:
+          eventListeners:
             click:        @handleUp
           value:          '+ 1'
           type:           'submit'
@@ -38,7 +38,7 @@ module.exports = Inputs = Himesama.Component
       div className:      'column', 
         input 
           className:      'nullButton'
-          eventListener:
+          eventListeners:
             click:        @handleDown
           value:          '- 1'
           type:           'submit'
@@ -46,7 +46,7 @@ module.exports = Inputs = Himesama.Component
       div className:      'column', 
         input
           className:      'cell'
-          eventListener:
+          eventListeners:
             keydown:      @handleKey
           placeholder:    'type word, press enter'
 

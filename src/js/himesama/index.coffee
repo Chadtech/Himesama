@@ -30,7 +30,7 @@ module.exports = Himesama =
           switch key
             when 'className'
               output.setAttribute 'class', attribute
-            when 'eventListener'
+            when 'eventListeners'
               _.forEach (_.keys attribute), (event) =>
                 act = attribute[event]
                 output.addEventListener event, act

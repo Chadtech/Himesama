@@ -1,6 +1,6 @@
 # Libraries
 Himesama = require './himesama'
-{el}     = require './himesama'
+{ el }   = require './himesama'
 _        = require 'lodash'
 
 # DOM
