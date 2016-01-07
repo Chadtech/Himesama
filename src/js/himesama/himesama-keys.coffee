@@ -3,4 +3,5 @@ module.exports = [
   'setState'
   'isHimesamaComponent'
   'state'
+  'id'
 ]

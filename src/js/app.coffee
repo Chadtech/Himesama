@@ -1,6 +1,6 @@
 # Libraries
 Himesama                 = require './himesama'
-{ el,  Doc, Render }     = Himesama
+{ el, Doc, Render }      = Himesama
 { Component, initState } = Himesama
 Render                   = Himesama.getRender()
 { getElementById }       = Doc
@@ -25,16 +25,26 @@ Words  = require './words'
 
 App = Himesama.Component
 
+  margin: 9 + 'px'
+
   render: ->
 
     console.log 'Rendering App'
 
-    div null,
+    div
+      style:
+        marginTop:  @margin
+        marginLeft: @margin
+
+      # Text Retrived from state
       p className: 'point', @state.title
       p className: 'point', @state.catchPhrase 
+
+      # Components
       Count
       Inputs
       Words
+
 
 Render App, getElementById 'mount'
 

@@ -222,7 +222,7 @@ body {
   webkit-font-smoothing: none;
   -webkit-font-smoothing: none;
   outline: none;
-  width: 50px;
+  width: 150px;
 }
 .cell:hover {
   border-color: #c6b988;
@@ -247,7 +247,7 @@ body {
   webkit-font-smoothing: none;
   -webkit-font-smoothing: none;
   outline: none;
-  width: 50px;
+  width: 150px;
   background-color: #969d66;
   color: #060a00;
 }

@@ -1,6 +1,6 @@
 # Libraries
 Himesama = require './himesama'
-{el}     = require './himesama'
+{ el }   = require './himesama'
 
 # DOM
 div   = el 'div'
@@ -25,25 +25,31 @@ module.exports = Inputs = Himesama.Component
 
     console.log 'Rendering inputs'
 
-    div className: 'row',
+    div className:        'row',
 
-      div className: 'column',    
+      div className:      'column',    
         input 
-          className: 'nullButton'
-          onClick:   @handleUp
-          value:     '+ 1'
-          type:      'submit'
+          className:      'nullButton'
+          eventListener:
+            click:        @handleUp
+          value:          '+ 1'
+          type:           'submit'
       
-      div className: 'column', 
+      div className:      'column', 
         input 
-          className: 'nullButton'
-          onClick:   @handleDown
-          value:     '- 1'
-          type:      'submit'
+          className:      'nullButton'
+          eventListener:
+            click:        @handleDown
+          value:          '- 1'
+          type:           'submit'
 
-      div className: 'column', 
+      div className:      'column', 
         input
-          className:    'cell'
-          onKeyDown:    @handleKey
-          placeholder:  'type a word, press enter'
+          className:      'cell'
+          eventListener:
+            keydown:      @handleKey
+          placeholder:    'type word, press enter'
+
+
+
 

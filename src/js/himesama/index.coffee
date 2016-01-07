@@ -6,8 +6,10 @@ himesamaKeys = require './himesama-keys'
   querySelectorAll
   activeElement
   querySelector } = require './himesama-doc'
+makeStyleString   = require './style-to-string' 
 
-
+addressKey = 'himesama-address'
+IDKey      = 'himesama-id'
 
 module.exports = Himesama =
   
@@ -16,8 +18,8 @@ module.exports = Himesama =
       args       = arguments 
       attributes = args[0]
       innerHTML  = []
-      _.forEach ([ 0 .. (args.length - 1) ].slice 1), (i) -> 
-        innerHTML.push args[i]
+      _.forEach ([ 0 .. (args.length - 1) ].slice 1), 
+        (i) -> innerHTML.push args[i]
       
       output = createElement type
 
@@ -26,12 +28,15 @@ module.exports = Himesama =
           attribute = attributes[key]
 
           switch key
-            when 'onClick'
-              output.addEventListener 'click', attribute
-            when 'onKeyDown'
-              output.addEventListener 'keydown', attribute
             when 'className'
               output.setAttribute 'class', attribute
+            when 'eventListener'
+              _.forEach (_.keys attribute), (event) =>
+                act = attribute[event]
+                output.addEventListener event, act
+            when 'style'
+              style = makeStyleString attribute
+              output.setAttribute 'style', style
             else
               output.setAttribute key, attribute
 
@@ -40,11 +45,11 @@ module.exports = Himesama =
         if child?
           if typeof child is 'string'
             child = createTextNode child
-          if child.isHimesamaComponent
-            name  = child.name
+          if child.isHimesama
+            id    = child.id
             child = child.render()
-            child.setAttribute 'himesama-name', name
-
+            child.setAttribute IDKey, id
+          
           output.appendChild child
 
       output
@@ -56,13 +61,13 @@ module.exports = Himesama =
       @Root       = root
 
     rendering = @Root.render()
-    @allocateID rendering, '.0'
+    @allocateAddress rendering, '.0'
     @MountPoint.appendChild rendering
 
-  allocateID: (element, address) ->
-    element.setAttribute 'himesama-id', address
+  allocateAddress: (element, address) ->
+    element.setAttribute addressKey, address
     _.forEach element.children, (child, ci) =>
-      @allocateID child, address + '.' + ci
+      @allocateAddress child, address + '.' + ci
 
   getIndex: (id) ->
     output = ''
@@ -73,33 +78,30 @@ module.exports = Himesama =
     output
 
   Rerender: (statePiece) ->
-    _.forEach @rerenderees[statePiece], (name) =>
-      nameTag       = '[himesama-name="' + name + '"]'
-      himesamaNode  = querySelector nameTag
-      nodeIndex     = himesamaNode.getAttribute 'himesama-id'
-      index         = @getIndex nodeIndex
-
-      parent        = himesamaNode.parentElement
+    _.forEach @rerenderees[statePiece], (id) =>
+      idValue      = '[' + IDKey + '="' + id + '"]'
+      himesamaNode = querySelector idValue
+      address      = himesamaNode.getAttribute addressKey
+      index        = @getIndex address
+      parent       = himesamaNode.parentElement
+      
       himesamaNode.remove()
 
-      parentsID     = parent.getAttribute 'himesama-id'
-      childrenCount = parent.children.length - 1
+      rendering = @components[ id ].render()
+      rendering.setAttribute IDKey, id
+      @allocateAddress rendering, address
 
-      rendering = @components[name].render()
-      rendering.setAttribute 'himesama-name', name
-      @allocateID rendering, nodeIndex
-
-      parent.insertBefore rendering, parent.childNodes[index]
+      parent.insertBefore rendering, 
+        parent.childNodes[index]
 
 
-  getRender: ->
-    @Render.bind @
+  getRender: -> @Render.bind @
 
   initState: (state) ->
     @state        = state
     @rerenderees  = _.mapValues state, -> []
 
-  getStore: -> @state
+  getState: -> @state
 
   setState: (newValue) -> 
     _.forEach (_.keys newValue), (key) =>
@@ -107,7 +109,6 @@ module.exports = Himesama =
       @Rerender key
 
   components: {}
-
   Component: (c) -> 
 
     _.forEach (_.keys c), (key) ->
@@ -115,17 +116,15 @@ module.exports = Himesama =
         if typeof c[key] is 'function'
           c[key] = c[key].bind c
 
-    componentId = (Math.random().toString 16).slice 2
-    c.name      = componentId
-    @components[componentId] = c
+    c.id = (Math.random().toString 36).slice 2
+    @components[ c.id ] = c
 
     _.forEach (c.needs), (need) =>
-      @rerenderees[need].push c.name
+      @rerenderees[need].push c.id
 
-    c.isHimesamaComponent = true
-    c.setState            = @setState.bind Himesama
-    c.state               = @getStore()
-
+    c.isHimesama = yes
+    c.setState   = @setState.bind Himesama
+    c.state      = @getState()
     c
 
 
