@@ -25,7 +25,7 @@ module.exports = Inputs = Himesama.Component
 
     console.log 'Rendering inputs'
 
-    div className:        'row',
+    div className: 'row',
 
       div className:      'column',    
         input 

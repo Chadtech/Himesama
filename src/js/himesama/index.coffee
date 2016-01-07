@@ -64,9 +64,9 @@ module.exports = Himesama =
     @allocateAddress rendering, '.0'
     @MountPoint.appendChild rendering
 
-  allocateAddress: (element, address) ->
-    element.setAttribute addressKey, address
-    _.forEach element.children, (child, ci) =>
+  allocateAddress: (el, address) ->
+    el.setAttribute addressKey, address
+    _.forEach el.children, (child, ci) =>
       @allocateAddress child, address + '.' + ci
 
   getIndex: (id) ->
@@ -77,8 +77,8 @@ module.exports = Himesama =
       charIndex--
     output
 
-  Rerender: (statePiece) ->
-    _.forEach @rerenderees[statePiece], (id) =>
+  Rerender: (stateKey) ->
+    _.forEach @rerenderees[stateKey], (id) =>
       idValue      = '[' + IDKey + '="' + id + '"]'
       himesamaNode = querySelector idValue
       address      = himesamaNode.getAttribute addressKey
@@ -93,7 +93,6 @@ module.exports = Himesama =
 
       parent.insertBefore rendering, 
         parent.childNodes[index]
-
 
   getRender: -> @Render.bind @
 
