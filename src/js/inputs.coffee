@@ -10,16 +10,16 @@ input = el 'input'
 module.exports = Inputs = Himesama.Component
 
   handleUp: (event) ->
-    @setState counter: @state.counter + 1
+    @setState count: @state.count + 1
 
   handleDown: (event) ->
-    @setState counter: @state.counter - 1
-
-  handleKey: (event) ->
-    if event.which is 13
-      @state.words.push event.target.value
+    @setState count: @state.count - 1
+  
+  handleSubmit: (e) ->
+    if e.which is 13
+      @state.words.push e.target.value
       @setState words: @state.words
-      event.target.value = ''
+      e.target.value = ''
 
   render: ->
 
@@ -47,9 +47,9 @@ module.exports = Inputs = Himesama.Component
         input
           className:      'cell'
           eventListeners:
-            keydown:      @handleKey
+            input:        @handleKey
+            keydown:      @handleSubmit
           placeholder:    'type word, press enter'
-
 
 
 

@@ -11,6 +11,29 @@ makeStyleString   = require './style-to-string'
 addressKey = 'himesama-address'
 IDKey      = 'himesama-id'
 
+getByAttribute = (key, value) ->
+  querySelector '[' + key + '="' + value + '"]'
+
+isParentOf = (a, b) ->
+  if a isnt b
+    _.reduce a, (sum, char, ci) ->
+      sum and (char is b[ci])
+  else
+    false
+
+removeChildren = (addresses) ->
+  addresses = _.map addresses, (id) ->
+    node    = getByAttribute IDKey, id
+    address = node.getAttribute addressKey
+    [address, id]
+
+  addresses = _.filter addresses, (address0) ->
+    _.reduce addresses, (sum, address1) ->
+      sum and not isParentOf address0[0], address1[0]
+
+  _.map addresses, (address) -> address[1]
+
+
 module.exports = Himesama =
   
   el: (type) ->
@@ -61,6 +84,7 @@ module.exports = Himesama =
       @Root       = root
 
     rendering = @Root.render()
+    rendering.setAttribute IDKey, @Root.id
     @allocateAddress rendering, '.0'
     @MountPoint.appendChild rendering
 
@@ -78,14 +102,22 @@ module.exports = Himesama =
     output
 
   Rerender: (stateKey) ->
-    _.forEach @rerenderees[stateKey], (id) =>
-      idValue      = '[' + IDKey + '="' + id + '"]'
-      himesamaNode = querySelector idValue
-      address      = himesamaNode.getAttribute addressKey
-      index        = @getIndex address
-      parent       = himesamaNode.parentElement
+    addresses = removeChildren @rerenderees[ stateKey ]
+    _.forEach addresses, (id) =>
+
+      activeEl      = document.activeElement
+      activeAddress = activeEl.getAttribute addressKey
+
+      if activeEl.type is 'text'
+        @textStart = activeEl.selectionStart
+        @textEnd   = activeEl.selectionEnd
+
+      node    = getByAttribute IDKey, id
+      address = node.getAttribute addressKey
+      index   = @getIndex address
+      parent  = node.parentElement
       
-      himesamaNode.remove()
+      node.remove()
 
       rendering = @components[ id ].render()
       rendering.setAttribute IDKey, id
@@ -93,6 +125,12 @@ module.exports = Himesama =
 
       parent.insertBefore rendering, 
         parent.childNodes[index]
+
+      toFocus = getByAttribute addressKey, activeAddress
+      toFocus.focus()
+
+      if toFocus.type is 'text'
+        toFocus.setSelectionRange @textStart, @textEnd
 
   getRender: -> @Render.bind @
 

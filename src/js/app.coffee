@@ -10,18 +10,18 @@ p   = el 'p'
 div = el 'div'
 
 # State
-initialState = 
+Himesama.initState 
   title:       'Himesama..'
-  catchPhrase: 'Lets make websites senpai!!'
-  counter:     0
+  catchPhrase: 'Lets make websites senpai !!'
+  count:       0
   words:       []
-Himesama.initState initialState
 
 # Components
-Inputs = require './inputs'
-Count  = require './count'
-Words  = require './words'
-
+Inputs      = require './inputs'
+Count       = require './count'
+Words       = require './words'
+Title       = require './title'
+TitleInput  = require './title-input'
 
 App = Himesama.Component
 
@@ -37,7 +37,9 @@ App = Himesama.Component
         marginLeft: @margin
 
       # Text Retrived from state
-      p className: 'point', @state.title
+      Title
+      TitleInput
+      
       p className: 'point', @state.catchPhrase 
 
       # Components
