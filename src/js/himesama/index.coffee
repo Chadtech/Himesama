@@ -105,32 +105,34 @@ module.exports = Himesama =
     addresses = removeChildren @rerenderees[ stateKey ]
     _.forEach addresses, (id) =>
 
-      activeEl      = document.activeElement
-      activeAddress = activeEl.getAttribute addressKey
+      node = getByAttribute IDKey, id
+      if node?
 
-      if activeEl.type is 'text'
-        @textStart = activeEl.selectionStart
-        @textEnd   = activeEl.selectionEnd
+        address = node.getAttribute addressKey
+        index   = @getIndex address
+        parent  = node.parentElement
+        
+        activeEl      = document.activeElement
+        activeAddress = activeEl.getAttribute addressKey
 
-      node    = getByAttribute IDKey, id
-      address = node.getAttribute addressKey
-      index   = @getIndex address
-      parent  = node.parentElement
-      
-      node.remove()
+        if activeEl.type is 'text'
+          @textStart = activeEl.selectionStart
+          @textEnd   = activeEl.selectionEnd
 
-      rendering = @components[ id ].render()
-      rendering.setAttribute IDKey, id
-      @allocateAddress rendering, address
+        node.remove()
 
-      parent.insertBefore rendering, 
-        parent.childNodes[index]
+        rendering = @components[ id ].render()
+        rendering.setAttribute IDKey, id
+        @allocateAddress rendering, address
 
-      toFocus = getByAttribute addressKey, activeAddress
-      toFocus.focus()
+        parent.insertBefore rendering, 
+          parent.childNodes[index]
 
-      if toFocus.type is 'text'
-        toFocus.setSelectionRange @textStart, @textEnd
+        toFocus = getByAttribute addressKey, activeAddress
+        toFocus.focus()
+
+        if toFocus.type is 'text'
+          toFocus.setSelectionRange @textStart, @textEnd
 
   getRender: -> @Render.bind @
 

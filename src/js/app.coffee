@@ -36,10 +36,14 @@ App = Himesama.Component
         marginTop:  @margin
         marginLeft: @margin
 
-      # Text Retrived from state
       Title
+
+      div 
+        style:
+          height: '1em'
+
       TitleInput
-      
+
       p className: 'point', @state.catchPhrase 
 
       # Components
