@@ -21,11 +21,11 @@
 
   isParentOf = function(a, b) {
     if (a !== b) {
-      return _.reduce(a, function(sum, char, ci) {
+      return !_.reduce(a, function(sum, char, ci) {
         return sum && (char === b[ci]);
       });
     } else {
-      return false;
+      return true;
     }
   };
 
@@ -38,7 +38,7 @@
     });
     addresses = _.filter(addresses, function(address0) {
       return _.reduce(addresses, function(sum, address1) {
-        return sum && !isParentOf(address0[0], address1[0]);
+        return sum && isParentOf(address0[0], address1[0]);
       });
     });
     return _.map(addresses, function(address) {
@@ -49,17 +49,10 @@
   module.exports = Himesama = {
     el: function(type) {
       return function() {
-        var args, attributes, innerHTML, j, output, ref1, results;
-        args = arguments;
+        var args, attributes, innerHTML, output;
+        args = _.toArray(arguments);
         attributes = args[0];
-        innerHTML = [];
-        _.forEach((function() {
-          results = [];
-          for (var j = 0, ref1 = args.length - 1; 0 <= ref1 ? j <= ref1 : j >= ref1; 0 <= ref1 ? j++ : j--){ results.push(j); }
-          return results;
-        }).apply(this).slice(1), function(i) {
-          return innerHTML.push(args[i]);
-        });
+        innerHTML = args.slice(1);
         output = createElement(type);
         if (attributes != null) {
           _.forEach(_.keys(attributes), (function(_this) {
@@ -88,7 +81,7 @@
         _.forEach(innerHTML, function(child, ci) {
           var id;
           if (child != null) {
-            if (typeof child === 'string') {
+            if (_.isString(child)) {
               child = createTextNode(child);
             }
             if (child.isHimesama) {
@@ -124,52 +117,55 @@
       })(this));
     },
     getIndex: function(id) {
-      var charIndex, output;
+      var ci, output;
       output = '';
-      charIndex = id.length - 1;
-      while (id[charIndex] !== '.') {
-        output = id[charIndex] + output;
-        charIndex--;
+      ci = id.length - 1;
+      while (id[ci] !== '.') {
+        output = id[ci] + output;
+        ci--;
       }
       return output;
     },
     Rerender: function(stateKey) {
       var addresses;
-      addresses = removeChildren(this.rerenderees[stateKey]);
+      addresses = removeChildren(this.rerendees[stateKey]);
       return _.forEach(addresses, (function(_this) {
         return function(id) {
-          var activeAddress, activeEl, address, index, node, parent, rendering, toFocus;
-          node = getByAttribute(IDKey, id);
-          if (node != null) {
-            address = node.getAttribute(addressKey);
-            index = _this.getIndex(address);
-            parent = node.parentElement;
-            activeEl = document.activeElement;
-            activeAddress = activeEl.getAttribute(addressKey);
-            if (activeEl.type === 'text') {
-              _this.textStart = activeEl.selectionStart;
-              _this.textEnd = activeEl.selectionEnd;
-            }
-            node.remove();
-            rendering = _this.components[id].render();
-            rendering.setAttribute(IDKey, id);
-            _this.allocateAddress(rendering, address);
-            parent.insertBefore(rendering, parent.childNodes[index]);
-            toFocus = getByAttribute(addressKey, activeAddress);
-            toFocus.focus();
-            if (toFocus.type === 'text') {
-              return toFocus.setSelectionRange(_this.textStart, _this.textEnd);
-            }
-          }
+          return _this.RerenderThis(id);
         };
       })(this));
+    },
+    RerenderThis: function(id) {
+      var activeAddress, activeEl, address, index, node, parent, rendering, toFocus;
+      node = getByAttribute(IDKey, id);
+      if (node != null) {
+        address = node.getAttribute(addressKey);
+        index = this.getIndex(address);
+        parent = node.parentElement;
+        activeEl = document.activeElement;
+        activeAddress = activeEl.getAttribute(addressKey);
+        if (activeEl.type === 'text') {
+          this.textStart = activeEl.selectionStart;
+          this.textEnd = activeEl.selectionEnd;
+        }
+        node.remove();
+        rendering = this.components[id].render();
+        rendering.setAttribute(IDKey, id);
+        this.allocateAddress(rendering, address);
+        parent.insertBefore(rendering, parent.childNodes[index]);
+        toFocus = getByAttribute(addressKey, activeAddress);
+        toFocus.focus();
+        if (toFocus.type === 'text') {
+          return toFocus.setSelectionRange(this.textStart, this.textEnd);
+        }
+      }
     },
     getRender: function() {
       return this.Render.bind(this);
     },
     initState: function(state) {
       this.state = state;
-      return this.rerenderees = _.mapValues(state, function() {
+      return this.rerendees = _.mapValues(state, function() {
         return [];
       });
     },
@@ -188,7 +184,7 @@
     Component: function(c) {
       _.forEach(_.keys(c), function(key) {
         if (indexOf.call(himesamaKeys, key) < 0) {
-          if (typeof c[key] === 'function') {
+          if (_.isFunction(c[key])) {
             return c[key] = c[key].bind(c);
           }
         }
@@ -197,7 +193,7 @@
       this.components[c.id] = c;
       _.forEach(c.needs, (function(_this) {
         return function(need) {
-          return _this.rerenderees[need].push(c.id);
+          return _this.rerendees[need].push(c.id);
         };
       })(this));
       c.isHimesama = true;
