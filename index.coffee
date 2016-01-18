@@ -32,21 +32,35 @@ Himesama =
         v = c[k]
         v = v.bind H if _.isFunction v
         H[k] = v
+        return
+
+      H.setAttr = (payload, next) ->
+        @dirty  = true
+        _.forEach (_.keys payload), (k) =>
+          @attributes[k] = payload[k]
+        Himesama.Rerender []
+      
+      attributes = arguments[0]
+      H.attributes = {}
+      if H.initAttributes?
+        H.attributes = H.initAttributes()
+      _.forEach (_.keys attributes), (k) =>
+        H.attributes[k] = attributes[k]
 
       H.dirty      = false
       H.setState   = Himesama.setState.bind Himesama
       H.state      = Himesama.state
       H.type       = 'custom'
-      H.attributes = arguments[0]
       H.children   = [ H.render() ]
       H
 
 
-  setState: (payload) ->
+  setState: (payload, next) ->
     keys = _.keys payload
     _.forEach keys, (k) =>
       @state[k] = payload[k]
     @Rerender keys
+    next?()
 
 
   initState: (state) -> @state = state
@@ -74,6 +88,7 @@ Himesama =
   handleDirt: (node) ->
     children = node.children
     if node.dirty? and node.dirty
+      node.dirty = false
       # We are re rendering the node
       # because its dirty
 
@@ -103,7 +118,8 @@ Himesama =
       element.remove()
 
       # Render up a fresh clean node
-      rendering = node.render()
+      rendering     = node.render()
+      node.children = [ rendering ]
       @allocateAddress rendering, address
 
       # Insert it under its parent, where
@@ -114,9 +130,8 @@ Himesama =
       # Focus back on the element that was active
       # before we did this re rendering stuff
       toFocus = @getByAttribute addressKey, activeAddress
-      toFocus.focus()
-
-      if toFocus.type is 'text'
+      toFocus?.focus()
+      if toFocus?.type is 'text'
         toFocus.setSelectionRange @textStart, @textEnd
 
     else
@@ -134,13 +149,14 @@ Himesama =
       @allocateAddress child, address + '.' + ci
 
 
-Himesama.Render     = Himesama.Render.bind Himesama
-Himesama.initState  = Himesama.initState.bind Himesama
-Himesama.DOM        = _.reduce ((require './dom-elements').split ' '), 
-    (sum, el) -> 
-      sum[el] = DOMCreate el
-      sum
-    {}
+Himesama.Render    = Himesama.Render.bind Himesama
+Himesama.initState = Himesama.initState.bind Himesama
+DOM                = (require './dom-elements').split ' '
+Himesama.DOM       = _.reduce DOM, 
+  (sum, el) -> 
+    sum[el] = DOMCreate el
+    sum
+  {}
 
 
 module.exports = _.extend Himesama, require './utilities'
