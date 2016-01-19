@@ -41,17 +41,23 @@ Himesama =
         Himesama.Rerender []
       
       attributes = arguments[0]
+      needs      = arguments[1]
+
       H.attributes = {}
       if H.initAttributes?
         H.attributes = H.initAttributes()
       _.forEach (_.keys attributes), (k) =>
         H.attributes[k] = attributes[k]
 
-      H.dirty      = false
-      H.setState   = Himesama.setState.bind Himesama
-      H.state      = Himesama.state
-      H.type       = 'custom'
-      H.children   = [ H.render() ]
+      if needs?
+        if H.needs? then H.needs.concat needs
+        else H.needs = needs
+
+      H.dirty    = false
+      H.setState = Himesama.setState.bind Himesama
+      H.state    = Himesama.state
+      H.type     = 'custom'
+      H.children = [ H.render() ]
       H
 
 

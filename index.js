@@ -27,7 +27,7 @@
     Doc: require('./himesama-doc'),
     createClass: function(c) {
       return function() {
-        var H, attributes;
+        var H, attributes, needs;
         H = {};
         _.forEach(_.keys(c), function(k) {
           var v;
@@ -47,6 +47,7 @@
           return Himesama.Rerender([]);
         };
         attributes = arguments[0];
+        needs = arguments[1];
         H.attributes = {};
         if (H.initAttributes != null) {
           H.attributes = H.initAttributes();
@@ -56,6 +57,13 @@
             return H.attributes[k] = attributes[k];
           };
         })(this));
+        if (needs != null) {
+          if (H.needs != null) {
+            H.needs.concat(needs);
+          } else {
+            H.needs = needs;
+          }
+        }
         H.dirty = false;
         H.setState = Himesama.setState.bind(Himesama);
         H.state = Himesama.state;
