@@ -27,7 +27,7 @@
     Doc: require('./himesama-doc'),
     createClass: function(c) {
       return function() {
-        var H, attributes, needs;
+        var H, args, attributes, needs;
         H = {};
         _.forEach(_.keys(c), function(k) {
           var v;
@@ -46,8 +46,9 @@
           })(this));
           return Himesama.Rerender([]);
         };
-        attributes = arguments[0];
-        needs = arguments[1];
+        args = _.toArray(arguments);
+        attributes = args[0];
+        needs = args[1];
         H.attributes = {};
         if (H.initAttributes != null) {
           H.attributes = H.initAttributes();
@@ -110,7 +111,7 @@
       })(this));
     },
     handleDirt: function(node) {
-      var activeAddress, activeEl, address, children, element, index, parent, rendering, toFocus;
+      var activeAddress, activeEl, address, children, element, index, parent, rendering, toFocus, type;
       children = node.children;
       if ((node.dirty != null) && node.dirty) {
         node.dirty = false;
@@ -121,7 +122,8 @@
         parent = element.parentElement;
         activeEl = document.activeElement;
         activeAddress = activeEl.getAttribute(addressKey);
-        if (activeEl.type === 'text') {
+        type = activeEl.type;
+        if (type === 'text' || type === 'textarea') {
           this.textStart = activeEl.selectionStart;
           this.textEnd = activeEl.selectionEnd;
         }
@@ -134,7 +136,8 @@
         if (toFocus != null) {
           toFocus.focus();
         }
-        if ((toFocus != null ? toFocus.type : void 0) === 'text') {
+        type = toFocus != null ? toFocus.type : void 0;
+        if (type === 'text' || type === 'textarea') {
           return toFocus.setSelectionRange(this.textStart, this.textEnd);
         }
       } else {

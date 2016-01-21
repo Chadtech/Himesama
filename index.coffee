@@ -40,8 +40,9 @@ Himesama =
           @attributes[k] = payload[k]
         Himesama.Rerender []
       
-      attributes = arguments[0]
-      needs      = arguments[1]
+      args       = _.toArray arguments
+      attributes = args[0]
+      needs      = args[1]
 
       H.attributes = {}
       if H.initAttributes?
@@ -50,8 +51,10 @@ Himesama =
         H.attributes[k] = attributes[k]
 
       if needs?
-        if H.needs? then H.needs.concat needs
-        else H.needs = needs
+        if H.needs?
+          H.needs.concat needs
+        else
+          H.needs = needs
 
       H.dirty    = false
       H.setState = Himesama.setState.bind Himesama
@@ -116,7 +119,8 @@ Himesama =
       
       # Get where the caret is (or, the text
       # selection starts and stops )
-      if activeEl.type is 'text'
+      type = activeEl.type
+      if type is 'text' or type is 'textarea'
         @textStart = activeEl.selectionStart
         @textEnd   = activeEl.selectionEnd
 
@@ -137,7 +141,8 @@ Himesama =
       # before we did this re rendering stuff
       toFocus = @getByAttribute addressKey, activeAddress
       toFocus?.focus()
-      if toFocus?.type is 'text'
+      type = toFocus?.type
+      if type is 'text' or type is 'textarea'
         toFocus.setSelectionRange @textStart, @textEnd
 
     else
