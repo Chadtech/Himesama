@@ -18,6 +18,11 @@ Why make a tool like Redux, that makes React work how we would want? Why not tak
 
 # How to use Himesama - Examples
 
+0 Just getting something to render
+1 Initializing State
+2 Using State
+3 Or just do things the old fashioned way
+
 ## 0 Just getting something to render
 
 Coffeescript
