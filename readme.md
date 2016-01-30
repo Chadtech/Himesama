@@ -205,6 +205,39 @@ To make Himesama components sensitive to certain areas of state, we define their
 
 Any component can reference any part of state, and can set any part of state too, when we define a components needs, we are defining what it needs to render. Without specified needs, a component wont necessarily refresh when its state values change.
 
+And alternatively, as we can see below, the needs of a component can be allocated by a parent component.
+
+Coffeescript
+``` coffeescript
+  
+App = Himesama.createClass
+  
+  render: ->
+    div null,
+      p className: 'point',
+        'Hi Friends'
+      Counter null, ['count']
+      Incrementer()
+
+```
+
+Javascript
+``` javascript
+
+var App = Himesama.createClass({
+  render: function(){
+    return (
+      div(null,
+        p({className:'point'},
+          'Hi Friends'),
+        Counter(null, ['count']),
+        Incremeneter()
+      )
+    )
+}
+})
+```
+
 
 # License
 
