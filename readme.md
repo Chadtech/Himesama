@@ -42,12 +42,12 @@ Render App(), document.getElementById 'mount'
 Javascript
 ``` Javascript
 var Himesama = require('himesama');
-var DOM      = Himesama.DOM
-var Render   = Himesama.Render
+var DOM      = Himesama.DOM;
+var Render   = Himesama.Render;
 
 // DOM
-var p   = DOM.p
-var div = DOM.div
+var p   = DOM.p;
+var div = DOM.div;
 
 var App = Himesamae.createClass({
   render: function(){
@@ -92,9 +92,9 @@ Javascript
 
 // ... 
 
-var initState = Himesama.initState
+var initState = Himesama.initState;
 
-initState({message: 'Hi Friends'})
+initState({message: 'Hi Friends'});
 
 
 var App = Himesama.createClass({
@@ -149,7 +149,7 @@ App = Himesama.createClass
 
 Javascript
 ``` javascript
-initState({count: 0})
+initState({count: 0});
 
 var Counter = Himesama.createClass({
   
