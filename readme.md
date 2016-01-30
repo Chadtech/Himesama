@@ -234,10 +234,63 @@ var App = Himesama.createClass({
         Incremeneter()
       )
     )
-}
+  }
 })
 ```
 
+## 3 Or just do things the old fashioned way
+
+Coffeescript
+``` coffeescript
+
+Counter = Himesama.createClass
+
+  initAttributes: -> count: 0
+
+  handle: ->
+    {count} = @attributes
+    @setAttr count: (count + 1)
+  
+  render: ->
+    {count} = @attributes
+
+    p 
+      className: 'point'
+      events:    (click: @handle),
+      count + ''
+
+```
+
+Javascript
+``` javascript
+
+var Counter = Himesama.createClass({
+  
+  initAttributes: function(){
+    return {count:0}
+  },
+
+  handle: function(){
+    var count = this.attributes.count;
+    this.setAttr(count:(count + 1));
+  },
+
+  render: function(){
+    return (
+      p({
+          className: 'point'
+          events:    {click: this.handle}
+        },
+        count + ''
+      )
+    )
+  }
+})
+
+
+```
+
+Setting and reading form a universal state isnt always the answer, and fortunately in Himesama it doesnt have to be. Just like in React, components have attributes (called 'Props' in React), which can be passed down into components from their parent.
 
 # License
 
