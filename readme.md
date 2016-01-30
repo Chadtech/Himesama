@@ -107,6 +107,104 @@ var App = Himesama.createClass({
 
 To initialize our universal state, we pass an object into the function initState. After that those state values can be referenced and set from any Himesama component.
 
+## 2 Using state
+
+Coffeescript
+``` coffeescript
+initState count: 0
+
+Counter = Himesama.createClass
+
+  needs: ['count']
+  
+  render: ->
+    {count} = @state
+
+    p className: 'point',
+      count + ''
+
+Incrementer = Himesama.createClass
+
+  handle: ->
+    {count} = @state
+    @setState count: (count + 1)
+
+  render: ->
+
+    input
+      type:   'submit'
+      value:  '+'
+      event:
+        click: @handle
+
+App = Himesama.createClass
+  
+  render: ->
+    div null,
+      p className: 'point',
+        'Hi Friends'
+      Counter()
+      Incrementer()
+```
+
+Javascript
+``` javascript
+initState({count: 0})
+
+var Counter = Himesama.createClass({
+  
+  needs: ['count'],
+
+  render: function(){
+    return (
+      p({className: 'point'},
+        count + ''
+      )
+    )
+  }
+})
+
+var Incrementer = Himesama.createClass({
+
+  handle: function(){
+    var count = @state.count
+    this.setState({count:(count + 1)})
+  }
+
+  render: function(){
+    return (
+      input({
+        type: 'submit',
+        value: '+',
+        event: {
+          click: this.handle
+        }
+      })
+    )
+  }
+})
+
+var App = Himesama.createClass({
+
+  render: function(){
+
+    return (
+      div(null,
+        p({className: 'point'},
+          'Hi Friends'),
+        Counter(),
+        Incrementer()
+      )
+    )
+  }
+})
+
+```
+
+To make Himesama components sensitive to certain areas of state, we define their 'needs'. In the Counter component, we can see that it has the property 'needs', which is an array listing what it needs.
+
+Any component can reference any part of state, and can set any part of state too, when we define a components needs, we are defining what it needs to render. Without specified needs, a component wont necessarily refresh when its state values change.
+
 
 # License
 
