@@ -300,6 +300,10 @@ var Counter = Himesama.createClass({
 
 Setting and reading form a universal state isnt always the answer, and fortunately in Himesama it doesnt have to be. Just like in React, components have attributes (called 'Props' in React), which can be passed down into components from their parent.
 
+# Development status
+
+As of today (20160130), Himesama works. And there are no known bugs (but undoubtedly unknown bugs). Himesama was discovered to lag in a spread sheet example, so the next priority is optimizing re rendering. The current plan is to diff a virtual dom against a current html structure, and then updating only whats different. As it is currently, Himesama components re-render entirely (as early React did, before it gained a bunch of fancy optimized methods).
+
 # License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), even if they have a dumb name like 'Felix', to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
