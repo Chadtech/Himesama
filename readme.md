@@ -4,7 +4,7 @@ Himesama is a JavaScript library for building user interfaces.
 
 The development of Himesama was made with the intent for it to resemble React as closely as possible. The primary exception, and the chief motivation to develop Himesama, was to build a React-like UI library in which UI components were sensitive to something other than their own internal state or props. 
 
-Himesama, in short, is React with a universal state that any Himesama compnoent will refresh from.
+Himesama, in short, is React with a universal state that any Himesama compnoent can refresh from (should it need to).
 
 # Why Himesama?
 
@@ -12,9 +12,9 @@ React is great, and with the addition of Redux, its ~~technically~~ even better.
 
 Redux solves that problem for us by implementing React state for us. Rather than in plain React, where we have to define the state of each component and how each component shares its state with others, with Redux we just define a single state, which exists outside of our React app. Redux essentially automates the allocation of state. Its very convenient!
 
-In design Redux makes sense, but actually using Redux is something no one is happy with. Its a pain in the ass to implement into a project. Redux is just a wrapper around React, which adds a layer of complexity and confusion. With Redux, React is left as it was, with all of its prior problems. Redux works essentially by hacking React to be sensitive to what it would ideally be sensitive to without Redux in the first place.
+Redux makes sense, but actually using Redux is something no one is happy with. Its a pain in the ass to implement into a project. Redux is just a wrapper around React, which adds a layer of complexity and confusion. With Redux, React is left as it was, with all of its prior problems. Redux works essentially by hacking React to be sensitive to what it would ideally be sensitive to without Redux in the first place.
 
-Why make a tool like Redux, that makes React work how we would want? Why not take Reacts history as a lesson, and iterate from React something even better? Thats Himesama: a React-like UI tool with a single app-wide state.
+Why make a tool like Redux, that makes React work how we would want? Why not take Reacts history as a lesson, and iterate from React something better? Thats Himesama: a React-like UI tool with a single app-wide state.
 
 # How to use Himesama - Examples
 
