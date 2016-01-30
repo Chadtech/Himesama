@@ -113,7 +113,7 @@ var App = Himesama.createClass({
 
 ```
 
-To initialize our universal state, we pass an object into the function initState. After that those state values can be referenced and set from any Himesama component.
+To initialize our universal state, we pass an object into the function initState. After that, those state values can be referenced and set from any Himesama component.
 
 ## 2 Using state
 
@@ -209,9 +209,9 @@ var App = Himesama.createClass({
 
 ```
 
-To make Himesama components sensitive to certain areas of state, we define their 'needs'. In the Counter component, we can see that it has the property 'needs', which is an array listing what it needs.
+To make Himesama components sensitive to certain areas of state, we define their 'needs'. In the Counter component, we can see that it has the property 'needs', which is an array listing what key values of state it needs
 
-Any component can reference any part of state, and can set any part of state too, when we define a components needs, we are defining what it needs to render. Without specified needs, a component wont necessarily refresh when its state values change.
+Above I mentioned that any component can reference any part of state, and can set any part of state too. When we define a components needs, we arent defining what it 'gets', rather, we are defining what it needs to render. Without specified needs, a component wont necessarily refresh when its state values change. A components list of needs are basically what it needs to show, not what it needs to get (it already gets everything).
 
 And alternatively, as we can see below, the needs of a component can be allocated by a parent component.
 
