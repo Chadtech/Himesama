@@ -1,6 +1,77 @@
 # Himesama
 
-Himesama is a YhavaScript library for building user interfaces. 
+Himesama is a JavaScript library for building user interfaces. 
 
-Its just like React, except components re-render in response to a single global state (like in redux) rather than states distributed to each component.
+The development of Himesama was made with the intent for it to resemble React as closely as possible. The primary exception, and the chief motivation to develop Himesama, was to build a React-like UI library in which UI components were sensitive to something other than their own internal state or props. 
 
+Himesama, in short, is React with a universal state that any Himesama compnoent will refresh from.
+
+# Why Himesama?
+
+React is great, and with the addition of Redux, its ~~technically~~ even better. Lets consider what problem exactly Redux saves React devs from. React is basically perfect, and part of how it works is that each UI component has 'state' which stores values that have some role in rendering. This isnt a problem per se- it does create a wonderful relationship between the app structure and the structure of state-, but it does mean that making React components share values stored in their state a nuisance.
+
+Redux solves that problem for us by implementing React state for us. Rather than in plain React, where we have to define the state of each component and how each component shares its state with others, with Redux we just define a single state, which exists outside of our React app. Redux essentially automates the allocation of state. Its very convenient!
+
+In design Redux makes sense, but actually using Redux is something no one is happy with. Its a pain in the ass, and furthermore its just a hack around React. With Redux, React is left as it was, with all of its prior problems. Redux works essentially by hacking React to be sensitive that single exogenous state.
+
+Why make a tool like Redux, that makes React work how we would want? Why not take Reacts history as a lesson, and iterate from React something even better? Thats Himesama: a React-like UI tool with a single app-wide state.
+
+# How to use Himesama - Examples
+
+## Just getting something to render
+
+Coffeescript
+``` coffeescript
+Himesama   = require 'himesama'
+{ DOM }    = Himesama
+{ Render } = Himesama
+
+# DOM
+{ p, div } = DOM
+
+App = Himesama.createClass
+
+  render: -> 
+
+    div null,
+      p className: 'point', 'Hi Friends'
+
+Render App(), document.getElementById 'mount'
+```
+
+Javascript
+``` Javascript
+var Himesama = require('himesama');
+var DOM      = Himesama.DOM
+var Render   = Himesama.Render
+
+// DOM
+var p   = DOM.p
+var div = DOM.div
+
+var App = Himesamae.createClass({
+  render: function(){
+    return 
+      div(null, 
+        p({className:'point'}, 'Hi Friends')
+      )
+    }
+  })
+
+Render(App(), document.getElementById('mount'));
+```
+
+Here we are doing nothing more than rendering an attribute-less div, with one child, that child being a p element with the class 'point', and the innerHTML of 'Hi Friends'.
+
+So far nothing special and nothing new. This is how you would render anything in React.
+
+
+
+
+# License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
