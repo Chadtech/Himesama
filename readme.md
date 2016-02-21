@@ -302,7 +302,7 @@ Setting and reading form a universal state isnt always the answer, and fortunate
 
 # Development status
 
-As of today (20160130), Himesama works. And there are no known bugs (but undoubtedly unknown bugs). Himesama was discovered to lag in a spread sheet example, so the next priority is optimizing re rendering. The current plan is to diff a virtual dom against a current html structure, and then updating only whats different. As it is currently, Himesama components re-render entirely (as early React did, before it gained a bunch of fancy optimized methods).
+As of today (20160221), Himesama works well. I just finished optimizing the diff merge render process. Where Himesama originally destroyed and recreated HTML as changes were made to the VDOM, Himesama now generates two VDOMs, one old and one updated. It merges the two, and edits the HTML only when differences exist between the VDOMs. Everything is great! However, I notice attributes dont 'trickle down' their children. This is an open problem, but not a fatal obstruction to a Himesama dev.
 
 # License
 
